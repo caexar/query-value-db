@@ -1,8 +1,11 @@
-import {getValueParameter} from './helper';
+import {getValueParameter, processParameterValues} from './helper';
 
-const id = 'PathResOrigVide';
+const value1 = 'VideoSizeS';
+const value2 = 'VideoSizeM';
+const value3 = 'VideoDuracDiv';
+const value4 = 'VideoSizeWS';
 
-getValueParameter(id)
+/*getValueParameter(id1)
   .then((result) => {
     if (result) {
       console.log('Resultado de la consulta:', result);
@@ -12,4 +15,12 @@ getValueParameter(id)
   })
   .catch((error) => {
     console.error('Error al consultar la base de datos:', error);
+  });*/
+
+  processParameterValues(value1, value2, value3, value4)
+  .catch((error) => {
+    console.error(error);
   });
+  
+
+  
