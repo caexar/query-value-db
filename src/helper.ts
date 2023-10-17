@@ -1,5 +1,5 @@
-import { Pool, QueryResult, Client } from 'pg';
-import { config } from 'dotenv';
+import {Client} from 'pg';
+import {config} from 'dotenv';
 import * as ffmpeg from 'fluent-ffmpeg';
 import * as fs from 'fs';
 import * as path from 'path';
