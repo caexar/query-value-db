@@ -82,7 +82,6 @@ async function getValueParameter(id1: string): Promise<any> {
         ffmpeg(videoPath)
           .output(outputPath)
           .videoCodec('libx264')
-          .noAudio()
           .size(size)
           .on('error', reject)
           .on('end', resolve)
