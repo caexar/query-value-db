@@ -119,6 +119,7 @@ async function getValueParameter(id1: string): Promise<any> {
       durationLimit: number,
       resolution480p: string,
       resolution720p: string,
+      outputOriginPath: string,
       output480pPath: string,
       output720pPath: string,
       counter: number
@@ -138,11 +139,14 @@ async function getValueParameter(id1: string): Promise<any> {
         await comprimirVideo(videoPath, output480pPath + `${name}_480p.mp4`, resolution480p);
         await comprimirVideo(videoPath, output720pPath + `${name}_720p.mp4`, resolution720p);
     
-        await recortarVideo(output480pPath + `${name}_480p.mp4`, `${name}_recorte1.mp4`, 0, info.duration / 2);
-    
-        await recortarVideo(output480pPath + `${name}_480p.mp4`, `${name}_recorte2.mp4`, info.duration / 2, info.duration / 2);
+        await recortarVideo(output480pPath + `${name}_480p.mp4`, output480pPath + `${name}_recorte1.mp4`, 0, info.duration / 2);
+        await recortarVideo(output480pPath + `${name}_480p.mp4`, output480pPath + `${name}_recorte2.mp4`, info.duration / 2, info.duration / 2);
+
+        await recortarVideo(output720pPath + `${name}_720p.mp4`, output720pPath + `${name}_recorte1.mp4`, 0, info.duration / 2);
+        await recortarVideo(output720pPath + `${name}_720p.mp4`, output720pPath + `${name}_recorte2.mp4`, info.duration / 2, info.duration / 2);
     
         fs.unlinkSync(output480pPath + `${name}_480p.mp4`);
+        fs.unlinkSync(output720pPath + `${name}_720p.mp4`);
     
         console.log('Proceso finalizado');
     
@@ -161,9 +165,8 @@ async function getValueParameter(id1: string): Promise<any> {
       } else if (info.duration > durationLimit) {
         console.log('El video excede el límite de duración. Recortando el video...');
     
-        await recortarVideo(videoPath, output480pPath + `${name}_recorte1.mp4`, 0, info.duration / 2);
-    
-        await recortarVideo(videoPath, output480pPath + `${name}_recorte2.mp4`, info.duration / 2, info.duration / 2,);
+        await recortarVideo(videoPath, outputOriginPath + `${name}_recorte1.mp4`, 0, info.duration / 2);
+        await recortarVideo(videoPath, outputOriginPath + `${name}_recorte2.mp4`, info.duration / 2, info.duration / 2,);
     
         console.log('Proceso finalizado');
     
@@ -215,7 +218,7 @@ async function getValueParameter(id1: string): Promise<any> {
       for (let i = 0; i < videosEnCarpeta.length; i++) {
         const video = videosEnCarpeta[i];
         console.log(video);
-        procesarVideo(`origen/${video}`, size * 1024 * 1024, duration, size480p, size720p, 'C:\\Project\\unionDB\\480p\\', 'C:\\Project\\unionDB\\720p\\', i+1)
+        procesarVideo(`origen/${video}`, 100 * 1024 * 1024, 10, size480p, size720p, 'C:\\Project\\unionDB\\origen\\', 'C:\\Project\\unionDB\\480p\\', 'C:\\Project\\unionDB\\720p\\', i+1)
       .catch(error => {
         console.error('Error al procesar el video:', error);
       });
