@@ -218,7 +218,7 @@ async function getValueParameter(id1: string): Promise<any> {
       for (let i = 0; i < videosEnCarpeta.length; i++) {
         const video = videosEnCarpeta[i];
         console.log(video);
-        procesarVideo(`origen/${video}`, 100 * 1024 * 1024, 10, size480p, size720p, 'C:\\Project\\unionDB\\origen\\', 'C:\\Project\\unionDB\\480p\\', 'C:\\Project\\unionDB\\720p\\', i+1)
+        procesarVideo(`origen/${video}`, size * 1024 * 1024, duration, size480p, size720p, 'C:\\Project\\unionDB\\origen\\', 'C:\\Project\\unionDB\\480p\\', 'C:\\Project\\unionDB\\720p\\', i+1)
       .catch(error => {
         console.error('Error al procesar el video:', error);
       });
